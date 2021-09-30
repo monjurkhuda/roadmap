@@ -1,4 +1,4 @@
-import { MikroORM } from '@mikro-orm/core';
+import { MikroORM } from "@mikro-orm/core";
 import { __prod__ } from './constants';
 
 const main = async () => {    
