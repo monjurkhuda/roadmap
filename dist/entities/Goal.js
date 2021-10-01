@@ -22,15 +22,15 @@ __decorate([
     __metadata("design:type", Number)
 ], Goal.prototype, "id", void 0);
 __decorate([
-    (0, core_1.Property)(),
+    (0, core_1.Property)({ type: "date" }),
     __metadata("design:type", Object)
 ], Goal.prototype, "createdAt", void 0);
 __decorate([
-    (0, core_1.Property)({ onUpdate: () => new Date() }),
+    (0, core_1.Property)({ type: "date", onUpdate: () => new Date() }),
     __metadata("design:type", Object)
 ], Goal.prototype, "updatedAt", void 0);
 __decorate([
-    (0, core_1.Property)(),
+    (0, core_1.Property)({ type: "text" }),
     __metadata("design:type", String)
 ], Goal.prototype, "title", void 0);
 Goal = __decorate([

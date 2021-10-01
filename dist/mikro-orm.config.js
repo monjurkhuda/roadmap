@@ -1,13 +1,21 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("./constants");
 const Goal_1 = require("./entities/Goal");
+const path_1 = __importDefault(require("path"));
 exports.default = {
+    migrations: {
+        path: path_1.default.join(__dirname, "./migrations"),
+        pattern: /^[\w-]+\d+\.[tj]s$/,
+    },
     entities: [Goal_1.Goal],
-    dbName: 'roadmap',
-    user: 'postgres',
-    password: 'postgres',
-    type: 'postgresql',
+    dbName: "roadmap",
+    user: "postgres",
+    password: "postgres",
+    type: "postgresql",
     debug: !constants_1.__prod__,
 };
 //# sourceMappingURL=mikro-orm.config.js.map
