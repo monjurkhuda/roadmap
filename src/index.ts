@@ -7,7 +7,7 @@ console.log("dirname--------+++++-------------->", __dirname);
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
-
+  await orm.getMigrator().up();
   const goal = orm.em.create(Goal, { title: "Become a Web Developer" });
   await orm.em.persistAndFlush(goal);
 };

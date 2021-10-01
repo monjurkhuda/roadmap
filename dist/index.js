@@ -9,6 +9,7 @@ const mikro_orm_config_1 = __importDefault(require("./mikro-orm.config"));
 console.log("dirname--------+++++-------------->", __dirname);
 const main = async () => {
     const orm = await core_1.MikroORM.init(mikro_orm_config_1.default);
+    await orm.getMigrator().up();
     const goal = orm.em.create(Goal_1.Goal, { title: "Become a Web Developer" });
     await orm.em.persistAndFlush(goal);
 };
