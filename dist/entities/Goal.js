@@ -37,4 +37,4 @@ Goal = __decorate([
     (0, core_1.Entity)()
 ], Goal);
 exports.Goal = Goal;
-//# sourceMappingURL=Post.js.map
+//# sourceMappingURL=Goal.js.map
