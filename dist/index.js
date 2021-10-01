@@ -12,6 +12,8 @@ const main = async () => {
     await orm.getMigrator().up();
     const goal = orm.em.create(Goal_1.Goal, { title: "Become a Web Developer" });
     await orm.em.persistAndFlush(goal);
+    const goals = await orm.em.find(Goal_1.Goal, {});
+    console.log(goals);
 };
 main();
 main().catch((err) => {

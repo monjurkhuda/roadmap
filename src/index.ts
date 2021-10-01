@@ -10,6 +10,9 @@ const main = async () => {
   await orm.getMigrator().up();
   const goal = orm.em.create(Goal, { title: "Become a Web Developer" });
   await orm.em.persistAndFlush(goal);
+
+  const goals = await orm.em.find(Goal, {});
+  console.log(goals);
 };
 
 main();
