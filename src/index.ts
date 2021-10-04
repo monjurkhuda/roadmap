@@ -1,18 +1,22 @@
 import { MikroORM } from "@mikro-orm/core";
 import { __prod__ } from "./constants";
-import { Goal } from "./entities/Goal";
+//import { Goal } from "./entities/Goal";
 import microConfig from "./mikro-orm.config";
-
-console.log("dirname--------+++++-------------->", __dirname);
+import express from "express";
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
   await orm.getMigrator().up();
-  const goal = orm.em.create(Goal, { title: "Become a Web Developer" });
-  await orm.em.persistAndFlush(goal);
 
-  const goals = await orm.em.find(Goal, {});
-  console.log(goals);
+  const app = express();
+
+  app.get("/", (_, res) => {
+    res.send("hello");
+  });
+
+  app.listen(4000, () => {
+    console.log("server started on localhost:4000");
+  });
 };
 
 main();
