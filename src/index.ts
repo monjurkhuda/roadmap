@@ -19,8 +19,6 @@ const main = async () => {
   });
 };
 
-main();
-
 main().catch((err) => {
   console.log("err-------------->", err);
 });
