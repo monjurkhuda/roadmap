@@ -19,6 +19,29 @@ let GoalResolver = class GoalResolver {
     goals({ em }) {
         return em.find(Goal_1.Goal, {});
     }
+    goal(id, { em }) {
+        return em.findOne(Goal_1.Goal, { id });
+    }
+    async createGoal(title, { em }) {
+        const goal = em.create(Goal_1.Goal, { title });
+        await em.persistAndFlush(goal);
+        return goal;
+    }
+    async updateGoal(id, title, { em }) {
+        const goal = await em.findOne(Goal_1.Goal, { id });
+        if (!goal) {
+            return null;
+        }
+        if (typeof title !== "undefined") {
+            goal.title = title;
+            await em.persistAndFlush(goal);
+        }
+        return goal;
+    }
+    async deleteGoal(id, { em }) {
+        await em.nativeDelete(Goal_1.Goal, { id });
+        return true;
+    }
 };
 __decorate([
     (0, type_graphql_1.Query)(() => [Goal_1.Goal]),
@@ -27,6 +50,39 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], GoalResolver.prototype, "goals", null);
+__decorate([
+    (0, type_graphql_1.Query)(() => Goal_1.Goal, { nullable: true }),
+    __param(0, (0, type_graphql_1.Arg)("id")),
+    __param(1, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], GoalResolver.prototype, "goal", null);
+__decorate([
+    (0, type_graphql_1.Mutation)(() => Goal_1.Goal),
+    __param(0, (0, type_graphql_1.Arg)("title")),
+    __param(1, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], GoalResolver.prototype, "createGoal", null);
+__decorate([
+    (0, type_graphql_1.Mutation)(() => Goal_1.Goal, { nullable: true }),
+    __param(0, (0, type_graphql_1.Arg)("id")),
+    __param(1, (0, type_graphql_1.Arg)("title", () => String, { nullable: true })),
+    __param(2, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String, Object]),
+    __metadata("design:returntype", Promise)
+], GoalResolver.prototype, "updateGoal", null);
+__decorate([
+    (0, type_graphql_1.Mutation)(() => Boolean),
+    __param(0, (0, type_graphql_1.Arg)("id")),
+    __param(1, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], GoalResolver.prototype, "deleteGoal", null);
 GoalResolver = __decorate([
     (0, type_graphql_1.Resolver)()
 ], GoalResolver);
