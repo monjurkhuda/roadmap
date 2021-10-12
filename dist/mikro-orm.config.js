@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("./constants");
 const Goal_1 = require("./entities/Goal");
 const path_1 = __importDefault(require("path"));
+const User_1 = require("./entities/User");
 exports.default = {
     migrations: {
         path: path_1.default.join(__dirname, "./migrations"),
         pattern: /^[\w-]+\d+\.[tj]s$/,
     },
-    entities: [Goal_1.Goal],
+    entities: [Goal_1.Goal, User_1.User],
     dbName: "roadmap",
     user: "postgres",
     password: "postgres",

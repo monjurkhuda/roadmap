@@ -2,13 +2,14 @@ import { __prod__ } from "./constants";
 import { Goal } from "./entities/Goal";
 import { MikroORM } from "@mikro-orm/core";
 import path from "path";
+import { User } from "./entities/User";
 
 export default {
   migrations: {
     path: path.join(__dirname, "./migrations"),
     pattern: /^[\w-]+\d+\.[tj]s$/,
   },
-  entities: [Goal],
+  entities: [Goal, User],
   dbName: "roadmap",
   user: "postgres",
   password: "postgres",
