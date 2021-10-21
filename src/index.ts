@@ -11,6 +11,8 @@ import { UserResolver } from "./resolvers/user";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+import { MyContext } from "./types";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
@@ -23,9 +25,19 @@ const main = async () => {
 
   app.use(
     session({
-      store: new RedisStore({ client: redisClient }),
+      name: "qid",
+      store: new RedisStore({
+        client: redisClient,
+        disableTouch: true,
+      }),
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+        httpOnly: true,
+        sameSite: "lax", //csrf protection
+        secure: __prod__, //cookie only works in https in prod (using http in dev)
+      },
       saveUninitialized: false,
-      secret: "keyboard cat",
+      secret: "bakulabaklussjkjsd",
       resave: false,
     })
   );
@@ -35,7 +47,12 @@ const main = async () => {
       resolvers: [HelloResolver, GoalResolver, UserResolver],
       validate: false,
     }),
-    context: () => ({ em: orm.em }),
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground({
+        // options
+      }),
+    ],
+    context: ({ req, res }): MyContext => ({ em: orm.em, req, res }),
   });
 
   await apolloServer.start();
