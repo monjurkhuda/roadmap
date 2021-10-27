@@ -40,6 +40,7 @@ class UserResponse {
 export class UserResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() { req, em }: MyContext) {
+    console.log("session ------------------->: ", req.session);
     if (!req.session?.userId) {
       return null;
     }
@@ -122,7 +123,6 @@ export class UserResolver {
     }
 
     req.session!.userId = user.id;
-
     return { user };
   }
 }

@@ -61,6 +61,7 @@ UserResponse = __decorate([
 let UserResolver = class UserResolver {
     me({ req, em }) {
         var _a;
+        console.log("session ------------------->: ", req.session);
         if (!((_a = req.session) === null || _a === void 0 ? void 0 : _a.userId)) {
             return null;
         }
